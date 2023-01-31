@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Home from './pages/Home';
+import Header from './components/Header';
+import Categories from './pages/Categories';
+import Search from './pages/Search';
+import DetailsPage from './pages/DetailsPage';
+import { AppContext } from './common/context';
+
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <Home />,
+    },
+    {
+        path: "/:newsId",
+        element: <DetailsPage />,
+    },
+    {
+        path: "/categories",
+        element: <Categories />,
+    },
+    {
+        path: "/search",
+        element: <Search />,
+    },
+    {
+        path: "/search/:newsId",
+        element: <DetailsPage />,
+    },
+]);
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [news, setNews] = useState(null);
+    const [country, setCountry] = useState("us");
+
+    const AppContextValue = {
+        news,
+        setNews,
+        country,
+        setCountry
+    };
+    return (
+        <AppContext.Provider value={AppContextValue}>
+            <Header />
+            <RouterProvider router={router} />
+        </AppContext.Provider>
+    )
 }
 
-export default App;
+export default App
