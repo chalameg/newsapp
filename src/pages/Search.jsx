@@ -41,7 +41,7 @@ function Search() {
       </form>
 
       <div className='flex'>
-        {isSearchVisible && filteredNews.map(news => {
+        {isSearchVisible && filteredNews?.map(news => {
           return <>
             <News key={news.title} news={news} />
           </>

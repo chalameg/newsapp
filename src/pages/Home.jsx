@@ -5,7 +5,7 @@ import News from '../components/News';
 function Home() {
     const [news, setNews] = useState([]);
     const {country, setCountry} = useContext(AppContext);
-    
+
     var url = "https://newsapi.org/v2/top-headlines?country="+country+"&"+'apiKey=ba67e752068d4339bfb8b4697b85bb5e';
           
    useEffect(() => {
@@ -22,7 +22,7 @@ function Home() {
 
     return (
         <div className='home'>
-            {news.map(news => {
+            {news?.map(news => {
                 return <>
                     <News key={news.title} news={news}/>
                 </>
